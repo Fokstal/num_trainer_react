@@ -1,0 +1,12 @@
+.popup-wnd {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.popup-wnd.show {
+    opacity: 1;
+}
+
+.popup-message {
+    font-size: 1.5rem;
+}

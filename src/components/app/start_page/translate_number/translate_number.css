@@ -1,0 +1,26 @@
+.btn-back-game {
+    display: block;
+    margin: 10rem auto 0 auto;
+
+    width: 10rem;
+}
+
+.start-game {
+    animation: fadeHide .5s;
+}
+
+.start-game h1 {
+    font-size: 7rem;
+}
+
+@keyframes fadeHide {
+    from {
+        display: block;
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        display: none;
+    }
+}

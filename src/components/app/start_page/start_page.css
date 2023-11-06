@@ -1,0 +1,22 @@
+.btn-close {
+    position: absolute;
+
+    right: 0;
+    left: 0;
+
+    animation: fade 10s;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+        bottom: 1000px;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: .5;
+        bottom: 20;
+    }
+}

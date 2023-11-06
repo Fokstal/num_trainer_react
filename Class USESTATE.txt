@@ -1,0 +1,43 @@
+import React from 'react';
+
+// Компоненты страниц
+import MainPage from './pages/MainPage';
+import RulesPage from './pages/RulesPage';
+import StartPage from './pages/StartPage';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { page: 'main' };
+
+    this.goToRulesPage = this.goToRulesPage.bind(this);
+    this.goToStartPage = this.goToStartPage.bind(this);
+    this.goToMainPage = this.goToMainPage.bind(this);
+  }
+
+  goToRulesPage() {
+    this.setState({ page: 'rules' });
+  }
+
+  goToStartPage() {
+    this.setState({ page: 'start' });
+  }
+
+  goToMainPage() {
+    this.setState({ page: 'main' });
+  }
+
+  render() {
+    const { page } = this.state;
+
+    if (page === 'main') {
+      return <MainPage goToRules={this.goToRulesPage} goToStart={this.goToStartPage} />;
+    } else if (page === 'rules') {
+      return <RulesPage goToMain={this.goToMainPage} />;
+    } else if (page === 'start') {
+      return <StartPage goToMain={this.goToMainPage} />;
+    }
+  }
+}
+
+export default App;

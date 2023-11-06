@@ -1,0 +1,12 @@
+.popup-box {
+    position: absolute;
+    margin: 7px 0 0 40px;
+}
+
+#answerBox {
+    border-width: 1px;
+    border-style: solid;
+    border-image: initial;
+    border-radius: 1%;
+    height: 40px;
+}

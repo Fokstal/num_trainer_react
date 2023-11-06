@@ -1,0 +1,19 @@
+/* .fly-obj {
+    position: relative;
+} */
+
+.line {
+    position: absolute;
+    width: 3px;
+    height: 20px;
+    border-radius: 30%;
+    opacity: .4;
+    
+    background-color: black;
+    transform: translateY(0);
+    transition: transform 2s;
+}
+
+.line.fly {
+    transform: translateY(-1000px);
+}
