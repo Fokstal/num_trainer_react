@@ -1,0 +1,8 @@
+.preset > label {
+    width: 100%;
+    text-align: left;
+}
+
+.preset:hover {
+    opacity: .4;
+}

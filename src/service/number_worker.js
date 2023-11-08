@@ -10,15 +10,19 @@ const billion = 1000000000;
 const trillion = 1000000000000;
 
 function generateNumberMap(countNumber, difficult) {
-    switch (difficult) {
-        case 1: {
-            return generateToHundred(countNumber);
-        }
+    // switch (difficult) {
+    //     case 1: {
+    //         return generateToHundred(countNumber);
+    //     }
 
-        default: {
-            return "Data is not valid!";
-        }
-    }
+    //     default: {
+    //         return "Data is not valid!";
+    //     }
+    // }
+
+
+    //Add difficult
+    return generateToHundred(countNumber);
 }
 
 function generateToHundred(countNumber = 100) {

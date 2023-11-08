@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./translate_number.css"
 
-import NumberWorker from "../../../../number_worker/number_worker.js"
+import NumberWorker from "@service/number_worker.js"
 import GameWorker from "./game_worker/game_worker.js";
 
 const TranslateNumber = ({ goToSelectPresetPage, gameSettings }) => {
-    const { countNumber, difficult } = gameSettings.preset;
+    const { countNumber, difficult } = gameSettings.presetSetting;
     const numbersToWords = NumberWorker.generateNumberMap(countNumber, difficult);
 
     const [isStartLogo, setIsStartLogo] = useState(true);

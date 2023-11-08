@@ -3,18 +3,10 @@
     display: block;
 }
 
-.preset > label {
-    width: 100%;
-    text-align: left;
-}
-
-.preset:hover {
-    opacity: .4;
-}
-
 .btn-start-game {
     display: block;
     margin: 0 auto 0 auto;
     
     width: 10rem;
 }
+

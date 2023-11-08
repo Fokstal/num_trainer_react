@@ -1,26 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import MainPage from "./main_page/main_page";
-import RulesPage from "./rules_page/rules_page";
-import StartPage from "./start_page/start_page";
+import MainPage from "@pages/main_page/main_page";
+import RulesPage from "@pages/rules_page/rules_page";
+import StartPage from "@pages/start_page/start_page";
 
 const App = () => {
 
-    const [page, setPage] = useState("main");
-    const [key, setKey] = useState(0);
-
-    const goToMainPage = () => setPage("main");
-    const goToRulesPage = () => setPage("rules");
-    const goToStartPage = () => {
-        setPage("start");
-        setKey(prevKey => prevKey + 1);
-    }
-
     return (
         <div className="app mt-2">
-            {page === "main" && <MainPage goToStartPage={goToStartPage} goToRulesPage={goToRulesPage} />}
-            {page === "start" && <StartPage key={key} goToMainPage={goToMainPage} />}
-            {page === "rules" && <RulesPage goToMainPage={goToMainPage} />}
+            <BrowserRouter>
+                <Routes>
+                    <Route path="*" element={<MainPage />} />
+                    <Route path="start" element={<StartPage />} />
+                    <Route path="rules" element={<RulesPage />} />
+                </Routes>
+            </BrowserRouter>
         </div>
     )
 }
