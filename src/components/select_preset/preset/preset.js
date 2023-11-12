@@ -10,7 +10,7 @@ const Preset = ({ presetSetting, index, setGameSettigns }) => {
 
     const stars = [];
 
-    for (let i = 0; i < difficult; i++) {
+    for (let i = 0; i < difficult + 1; i++) {
         stars.push(<i className="fa-regular fa-star" style={{ color: "#d99f20" }}></i>);
     }
 

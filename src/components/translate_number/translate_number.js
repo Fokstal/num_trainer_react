@@ -6,7 +6,7 @@ import GameWorker from "./game_worker/game_worker.js";
 
 const TranslateNumber = ({ goToSelectPresetPage, gameSettings }) => {
     const { countNumber, difficult } = gameSettings.presetSetting;
-    const numbersToWords = NumberWorker.generateNumberMap(countNumber, difficult);
+    const numbersToWords = NumberWorker.generateNumberMap(countNumber, difficult, gameSettings.separatorInTranslate);
 
     const [isStartLogo, setIsStartLogo] = useState(true);
 
@@ -23,7 +23,7 @@ const TranslateNumber = ({ goToSelectPresetPage, gameSettings }) => {
                 {isStartLogo ? <StartGame /> : <GameWorker numbersToWords={numbersToWords} gameSettings={gameSettings} />}
             </div>
 
-            <button className="btn-back-game btn btn-danger" onClick={() => { goToSelectPresetPage() }}>
+            <button className="btn-back-game btn btn-warning" onClick={() => { goToSelectPresetPage() }}>
                 Back <i class="fa-solid fa-rotate-left"></i>
             </button>
         </div>

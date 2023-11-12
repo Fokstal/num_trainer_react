@@ -1,34 +1,26 @@
-const engNumbersBefore20 = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-    "ten", "elve", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+import {
+    engNumbersBefore20, engNumbersOnTens,
+    minValByDiffArr, maxValByDiffArr
+} from "./constants";
 
-const engNumbersOnTens = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+const maxNumberStrLength = 12;
 
-const hundred = 100;
-const thousand = 1000;
-const million = 1000000;
-const billion = 1000000000;
-const trillion = 1000000000000;
+let currentSeparator = null;
 
-function generateNumberMap(countNumber, difficult) {
-    // switch (difficult) {
-    //     case 1: {
-    //         return generateToHundred(countNumber);
-    //     }
+function generateNumberMap(countNumber, difficult, separator) {
+    currentSeparator = separator;
 
-    //     default: {
-    //         return "Data is not valid!";
-    //     }
-    // }
+    if (difficult >= 0) {
+        return generateNumberMapByRange(minValByDiffArr[difficult], maxValByDiffArr[difficult], countNumber);
+    }
 
-
-    //Add difficult
-    return generateToHundred(countNumber);
+    // return generateNumberMapMix
 }
 
-function generateToHundred(countNumber = 100) {
-    checkCorrectCount(countNumber, hundred);
+function generateNumberMapByRange(minValue, maxValue, countNumber = 100) {
+    checkCorrectCount(countNumber, 100);
 
-    const numbers = getNumbersByRange(countNumber, 0, hundred);
+    const numbers = getNumbersByRange(countNumber, minValue, maxValue);
 
     return numbers;
 }
@@ -39,12 +31,13 @@ function checkCorrectCount(countNumber, range) {
     }
 }
 
+// Random by range
 function getNumbersByRange(countNumber, firstNumber, range) {
     let numbers = new Map();
     let i = 0;
 
     while (i < countNumber) {
-        const number = Math.floor(Math.random() * range)
+        const number = Math.floor(Math.random() * (range + 1))
         let word = getWordByNumber(number);
 
         if (!numbers.has(number)) {
@@ -82,7 +75,7 @@ function getWordByNumber(number) {
                     result += engNumbersOnTens[temp[1] / 1 - 2];
 
                     if (temp[2] / 1 - 1 > -1) {
-                        result += "-" + engNumbersBefore20[temp[2] / 1 - 1];
+                        result += currentSeparator + engNumbersBefore20[temp[2] / 1 - 1];
                     }
                 }
             }
@@ -120,7 +113,7 @@ function convertStringToCorrectForm(numberStr) {
     let isCorrect = true;
 
     while (isCorrect) {
-        if (numberStr.length === 12) {
+        if (numberStr.length === maxNumberStrLength) {
             isCorrect = false;
             continue;
         }
@@ -132,11 +125,7 @@ function convertStringToCorrectForm(numberStr) {
 }
 
 export default class NumberWorker {
-    static generateToHundred(countNumber) {
-        return generateToHundred(countNumber);
-    }
-
-    static generateNumberMap(countNumber, difficult) {
-        return generateNumberMap(countNumber, difficult);
+    static generateNumberMap(countNumber, difficult, separator) {
+        return generateNumberMap(countNumber, difficult, separator);
     }
 }

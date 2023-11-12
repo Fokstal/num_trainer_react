@@ -39,11 +39,17 @@ function GameWorker({ numbersToWords, gameSettings }) {
 
     let answerBoxRef = useRef(null);
 
+    function getStrWithSeparatorEvery3Chars(number, separator) {
+        let reversedStr = number + "".split('').reverse().join('');
+        let withDots = reversedStr.match(/.{1,3}/g).join(separator);
+        return withDots.split('').reverse().join('');
+      }
+
     function stopGame() {
         answerBoxRef.current.disabled = 1;
         setIsTime(false);
     }
-    
+
     const showPopupPerMs = (ms, message) => {
         setPopupSettings({
             message: message,
@@ -58,7 +64,6 @@ function GameWorker({ numbersToWords, gameSettings }) {
 
     const startCheckingResponse = () => {
         if (currentQuestionPosition < numbersToTranslate.length) {
-            // Alarm! Trim maybe don't working with big numbers. Exmp: one hundred thirty-six (spaces between numbers must be deleted?)
             if (userResponse.toLowerCase().trim() === wordsTranslate[currentQuestionPosition]) {
                 showPopupPerMs(1500, correctRespCharLayout)
                 setTimeout(() => {
@@ -79,7 +84,7 @@ function GameWorker({ numbersToWords, gameSettings }) {
         }
     };
 
-    useKeyPress("Enter", () => {startCheckingResponse()});
+    useKeyPress("Enter", () => { startCheckingResponse() });
 
     //Rework TIMER and Life BAR
     useEffect(() => {
@@ -113,12 +118,11 @@ function GameWorker({ numbersToWords, gameSettings }) {
         <div className="question row justify-content-center">
             {isPlayTime && <Timer time={timerValue} />}
             {isPlayLife && <LifeBar currentLife={lifeCount} />}
-            <div className='row'>
-                <h1 >{numbersToTranslate[currentQuestionPosition]}</h1>
-                <div className="popup-box">
-                    {popupSettings.isShow && <Popup message={popupSettings.message} className="popup" />}
-                </div>
-            </div>
+            <h1 className='number-to-translate w-auto'>{
+                // gameSettings.isSeparatedByDot ? 
+                // getStrWithSeparatorEvery3Chars(numbersToTranslate[currentQuestionPosition], ".") : 
+                numbersToTranslate[currentQuestionPosition]
+            }</h1>
             <input
                 ref={answerBoxRef}
                 type="text"
@@ -138,6 +142,10 @@ function GameWorker({ numbersToWords, gameSettings }) {
                     <div className="progress-bar bg-success" role="progressbar" style={{ width: `${100 / numbersToTranslate.length * correctAnswersCount}%` }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     <div className="progress-bar bg-dark-subtle" role="progressbar" style={{ width: `${100 / numbersToTranslate.length * 1}%` }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
+            </div>
+
+            <div className="popup-box py-auto">
+                {popupSettings.isShow && <Popup message={popupSettings.message} className="popup" />}
             </div>
         </div>
     );
